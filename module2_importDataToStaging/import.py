@@ -17,7 +17,7 @@ def load_data(csv_file_path):
         # Câu lệnh SQL LOAD DATA LOCAL INFILE
         load_data_query = f"""
             LOAD DATA LOCAL INFILE '{csv_file_path}' 
-            INTO TABLE Products 
+            INTO TABLE staging_temp
             FIELDS TERMINATED BY ',' 
             ENCLOSED BY '"' 
             LINES TERMINATED BY '\\n' 
@@ -36,5 +36,5 @@ def load_data(csv_file_path):
         conn.close()
 
 # Truyền đường dẫn của file CSV
-csv_file_path = 'D:/learning_code/datatwarehouse/module1.1_crapingDataFromSourceLazada/laz_motobike_20241203_042233.csv'  # Thay thế với đường dẫn thực tế của bạn
+csv_file_path = 'D:/learning_code/datatwarehouse/module1.1_crapingDataFromSourceLazada/laz_motobike_20241204_193647.csv'  # Thay thế với đường dẫn thực tế của bạn
 load_data(csv_file_path)

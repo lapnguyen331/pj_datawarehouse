@@ -8,8 +8,8 @@ import re
 from datetime import datetime
 
 # Khởi tạo DataFrame
-columns = ["id", "model_name","type" ,"color", "price", "brand", "version", "name", "engine_capacity",
-           "engine_type", "transmission_type", "features", "image_url", "source_url", "source_id",
+columns = ["id", "model_name","type" ,"color", "price","price_range", "brand", "version", "name", "engine_capacity",
+           "engine_type", "transmission_type", "features", "image_url", "source_url", "source_pid",
            "source_SkuId", "source_name", "status", "create_at"]
 
 def initialize_dataframe():
@@ -53,19 +53,22 @@ def getDetailItem(link, index, driver, brand):
         image = "N/A"
         
     product_info = extract_product_info(link)
-    product_id = product_info.get("product_id", "N/A")
-    sku_id = product_info.get("sku_id", "N/A")
+    product_id = product_info["product_id"]
+    sku_id = product_info["sku_id"]
+    price_range = "N/A"
     
-    return pd.DataFrame([[index, brand, image, color, product_id, sku_id]],
-                        columns=["detail_id", "brand", "image_url", "color", "source_id", "source_SkuId"])
+    return pd.DataFrame([[index, brand,price_range, image, color, product_id, sku_id]],
+                        columns=["detail_id", "brand", "price_range","image_url", "color", "source_id", "source_SkuId"])
 
 # Trích xuất product_id và sku_id từ URL
 def extract_product_info(url):
+    # Sử dụng biểu thức chính quy để tìm Product ID và SKU ID
     product_id_match = re.search(r"-i(\d+)", url)
     sku_id_match = re.search(r"-s(\d+)\.html", url)
+    
     return {
-        "product_id": product_id_match.group(1) if product_id_match else "N/A",
-        "sku_id": sku_id_match.group(1) if sku_id_match else "N/A"
+        "product_id": product_id_match.group(1) if product_id_match else None,
+        "sku_id": sku_id_match.group(1) if sku_id_match else None
     }
 
 # Gọi hàm crawl cho trang và lưu kết quả
@@ -75,7 +78,7 @@ def getDataPage(url, driver, brand,currentDateTime):
 
     for idx, row in df1.iterrows():
         try:
-            df_detail = getDetailItem(row['source_url'], row['id'], driver, brand,currentDateTime)
+            df_detail = getDetailItem(row['source_url'], row['id'], driver, brand)
             df_detail_list.append(df_detail)
         except Exception as e:
             print(f"Lỗi xử lý sản phẩm {row['source_url']}: {e}")

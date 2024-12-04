@@ -68,12 +68,7 @@ CREATE TABLE IF NOT EXISTS motobikeDim (
     features TEXT,
     image_url TEXT,
     status VARCHAR(255),
-    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (brand_id) REFERENCES brandDim(brand_id),
-    FOREIGN KEY (type_id) REFERENCES typeDim(type_id),
-    FOREIGN KEY (price_id) REFERENCES priceDim(price_id),
-    FOREIGN KEY (date_sk) REFERENCES dateDim(date_sk),
-    FOREIGN KEY (source_dim_id) REFERENCES sourceDim(source_id)  -- Sửa lại khoá ngoại tham chiếu đúng
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tạo bảng FactPrice sau khi bảng dateDim đã được tạo
@@ -84,10 +79,17 @@ CREATE TABLE IF NOT EXISTS FactPrice (
     date_sk INT,                                   -- Liên kết với bảng DateDim (Date Dimension)
     price_value FLOAT,                             -- Giá của sản phẩm tại thời điểm này
     source_id INT,                                 -- Liên kết với bảng SourceDim (Source Dimension)
+	brand_id int,
+	type_id int,
     FOREIGN KEY (motobike_id) REFERENCES motobikeDim(id),  -- Liên kết với bảng Motobike
     FOREIGN KEY (price_id) REFERENCES priceDim(price_id), -- Liên kết với bảng PriceDim
     FOREIGN KEY (date_sk) REFERENCES dateDim(date_sk),    -- Liên kết với bảng DateDim
-    FOREIGN KEY (source_id) REFERENCES sourceDim(source_id) -- Liên kết với bảng SourceDim
+    FOREIGN KEY (source_id) REFERENCES sourceDim(source_id) ,-- Liên kết với bảng SourceDim
+	FOREIGN KEY (brand_id) REFERENCES brandDim(brand_id), -- Liên kết với bảng brandDim
+	FOREIGN KEY (type_id) REFERENCES typeDim(type_id) -- Liên kết với bảng SourceDim
+
+	
+	
 );
 
 -- các aggregation
