@@ -60,7 +60,6 @@ CREATE TABLE IF NOT EXISTS motobikeDim (
     type_id INT,            -- Liên kết với bảng typeDim
     price_id INT,           -- Liên kết với bảng priceDim
     date_sk INT,            -- Liên kết với bảng dateDim
-    source_dim_id INT,      -- Khóa ngoại liên kết với bảng sourceDim
     name VARCHAR(500),
     engine_capacity VARCHAR(255),
     engine_type VARCHAR(255),
