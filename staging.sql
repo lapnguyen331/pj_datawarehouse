@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS staging_temp (
     type TEXT,
     color TEXT,
     price TEXT,
+	price_range text,
     brand TEXT,
     version TEXT,
     name TEXT,
