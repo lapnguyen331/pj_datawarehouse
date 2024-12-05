@@ -1,0 +1,17 @@
+[
+    {
+        'cateId':1,
+        'link':"https://hoangcau.com/collections/xe-honda",
+        'brand':'honda'
+    },
+    {
+        'cateId':2,
+        'link':"https://hoangcau.com/collections/yamaha",
+        'brand':"yamaha"
+    }
+    {
+        'cateId':3,
+        'link':"https://www.lazada.vn/xe-standard/osakar/",
+        'brand':"osakar"
+    }
+]
