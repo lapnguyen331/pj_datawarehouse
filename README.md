@@ -5,20 +5,20 @@ Repo gồm source 4 module, 1 proccess manager, tài liệu dự án + script sq
 
 Mục tiêu của đồ án:
 
-  tạo ra 1 tool cho phép client xem các báo cáo về giá xe máy theo tháng, ngày, brand, trend tăng giảm giá
+  -tạo ra 1 tool cho phép client xem các báo cáo về giá xe máy theo tháng, ngày, brand, trend tăng giảm giá
   
   
 Ý nghĩa của các tool:
 
-  module 1.1 :sử dụng selenium crawl data từ trang lazada.com mục xe máy
+  -module 1.1 :sử dụng selenium crawl data từ trang lazada.com mục xe máy
   
-  module 1.2 :sử dụng selenium crawl data từ trang hoangcau.com
+  -module 1.2 :sử dụng selenium crawl data từ trang hoangcau.com
   
-  module 2 : load data từ csv vào dbstaging_temp
+  -module 2 : load data từ csv vào dbstaging_temp
   
-  module3 : transform, validate, aggreegation dữ liệu từ staging vào warehouse
+  -module3 : transform, validate, aggreegation dữ liệu từ staging vào warehouse
   
-  module4: từ warehouse lấy ra dữ liệu cần để đổ vào datamart
+  -module4: từ warehouse lấy ra dữ liệu cần để đổ vào datamart
 
   
 Cách chạy tool:
@@ -39,18 +39,18 @@ Cách chạy tool:
     
 Các lỗi có thể xảy ra:
 
-  nguồn dữ liệu lazada.com và hoangcau.com không còn tồn tại trên url
+  -nguồn dữ liệu lazada.com và hoangcau.com không còn tồn tại trên url
   
-  xung đột các gói cài đặt
+  -xung đột các gói cài đặt
   
-  nguồn dữ liệu sử dụng service chặn crawler
+  -nguồn dữ liệu sử dụng service chặn crawler
   
 Lời nói cuối:
 
 
-  đây là sản phẩm thực sự chưa hoàn thiện, chúng tôi đã bị cháy deadline do khả năng quản lí rủi ro yếu kém cũng như kinh nghiệm làm việc non nớt
+  -đây là sản phẩm thực sự chưa hoàn thiện, chúng tôi đã bị cháy deadline do khả năng quản lí rủi ro yếu kém cũng như kinh nghiệm làm việc non nớt
   
-  môn warehouse thực sự rất nhiều thứ hay ho nên nếu bạn đang học thì hãy học thật tốt nhé 
+  -môn warehouse thực sự rất nhiều thứ hay ho nên nếu bạn đang học thì hãy học thật tốt nhé 
 
 
   
