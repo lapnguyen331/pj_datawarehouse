@@ -36,7 +36,7 @@ class ETLProcessManager:
                 VALUES (%s, %s, %s,%s, %s, %s,%s)
                 """
                 cursor.execute(sql, (procces_order,config_id, name,description,"pendding","RE",start_time,))
-                process_id = cursor.lastrowid  # Lấy ID mới nhất vừa được insert
+                procid = cursor.lastrowid  # Lấy ID mới nhất vừa được insert
 
             self.connection.commit()
             print(f"Process '{name}' added successfully.")
@@ -48,7 +48,7 @@ class ETLProcessManager:
                 status="SUCCESS",
                 location="add proccess method"
             )
-            return process_id
+            return procid
         except Exception as e:
             write_log("Add Process","error",message=f"Failed to add process: {str(e)}",
             status="FAILED")
@@ -195,7 +195,7 @@ class ETLProcessManager:
         try:
             while True:
                 with self.connection.cursor() as cursor:
-                    sql = "SELECT action FROM processcontrol WHERE process_id = %s"
+                    sql = "SELECT action FROM proccesscontrol WHERE process_id = %s"
                     cursor.execute(sql, (process_id,))
                     result = cursor.fetchone()
                     if result and result['action'] == 'Pause':
@@ -352,11 +352,10 @@ def scheduled_etl_job():
                 status="Failed",
                 location= "module 2, hc" +"processId:"+str(id2)
             )
-        manager.update_process_status(process_id=id2, status="Failed",action="stop", message=str(e))
+            manager.update_process_status(process_id=id2, status="Failed",action="stop", message=str(e))
     if manager.get_process_status(id2) == 'Success':
+        id3 = manager.add_process(config_id=4, name="module3: staging to warehouse", description="",procces_order =3,start_time=datetime.now())
         try:
-            id3 = manager.add_process(config_id=4, name="module3: staging to warehouse", description="",procces_order =3,start_time=datetime.now())
-
             manager.execute_step(process_id=id3, step_function=lambda: runModule3())
         except Exception as e:
             write_log(
@@ -366,7 +365,7 @@ def scheduled_etl_job():
                 status="Failed",
                 location= "module 3, hc" +"processId:"+str(id3)
             )
-        manager.update_process_status(process_id=id3, status="Failed", message=str(e))
+            manager.update_process_status(process_id=id3, status="Failed", message=str(e))
     if manager.get_process_status(id3) == 'Success':
         try:
             id4 = manager.add_process(config_id=5, name="module4: warehouse to mart", description="",procces_order =4,start_time=datetime.now())
@@ -379,7 +378,7 @@ def scheduled_etl_job():
                 status="Failed",
                 location= "module 4, hc" +"processId:"+str(id4)
             )
-        manager.update_process_status(process_id=id4, status="Failed",action="stop", message=str(e))
+            manager.update_process_status(process_id=id4, status="Failed",action="stop", message=str(e))
 
 #các hàm gọi thực thi module
 def runModule1(sourceName):
@@ -558,9 +557,10 @@ def run_java_jar_module4(jarPath):
 # manager.add_file(config_id=configdata['id'],name=configdata['name'],file_save=datetime.now(),dir_achive="hehe",dir_save=configdata['destination'],note="lưu file raw data",status="success")
 
 # Lập lịch hàng ngày vào 08:00
-schedule.every().day.at("20:53").do(scheduled_etl_job)
-schedule.every().day.at("07:42").do(scheduled_etl_job)
-print("Scheduled job at 20:50")
+# schedule.every().day.at("20:53").do(scheduled_etl_job)
+dt = "10:03" #set thời gian mặc định chạy hằng ngày ở đây
+schedule.every().day.at(dt).do(scheduled_etl_job)
+print("Scheduled job at "+dt)
 
 print("Scheduler started. Waiting for ETL jobs...")
 while True:

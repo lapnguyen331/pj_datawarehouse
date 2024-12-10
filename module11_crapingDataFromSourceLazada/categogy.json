@@ -1,0 +1,17 @@
+[
+    {
+        'cateId':1,
+        'link':"https://www.lazada.vn/xe-standard/honda/",
+        'brand':'honda'
+    },
+    {
+        'cateId':2,
+        'link':"https://www.lazada.vn/xe-standard/yamaha/",
+        'brand':"honda"
+    }
+    {
+        'cateId':3,
+        'link':"https://www.lazada.vn/xe-standard/osakar/",
+        'brand':"osakar"
+    }
+]

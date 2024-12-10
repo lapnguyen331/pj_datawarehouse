@@ -44,5 +44,5 @@ def load_data(relative_csv_path):
         conn.close()
 
 # Truyền đường dẫn tương đối của file CSV
-# relative_csv_path = "ouput/rawdata/hoangcau/laz_motobike_20241205_130314.csv"
-# load_data(relative_csv_path)
+relative_csv_path = "D:/learning_code/datatwarehouse/proccess_manager/ouput/rawdata/hoangcau//laz_motobike_20241210_072000.csv"
+load_data(relative_csv_path)
