@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import re
 from datetime import datetime
+import os
 
 # Khởi tạo DataFrame
 columns = ["id", "model_name","type" ,"color", "price","price_range", "brand", "version", "name", "engine_capacity",
@@ -118,9 +119,18 @@ def crawlerHC(filePath):
             driver.quit()
 
     filename = f"laz_motobike_{currentDateTime}.csv"
-    df_main.to_csv(path_or_buf=filePath+filename, index=False, encoding='utf-8')
+    df_main.drop('id',axis=1)
+    df_main['id'] = range(1, len(df_main) + 1)
+    parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+    target_dir = os.path.join(parent_dir, filePath)
+    csv_path = os.path.join(target_dir, filename)
+
+
+    df_main.to_csv(csv_path, index=False, encoding='utf-8')
     print(f"Crawl hoàn tất và lưu vào {filename}")
+    return [target_dir,filename]
 def subUrl(link):
     return link[0:-1]
 
-crawlerHC("data")
+# crawlerHC("/output/rawdata/hoangcau")

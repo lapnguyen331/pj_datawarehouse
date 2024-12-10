@@ -116,7 +116,10 @@ def crawlerLaz(filepath):
             driver.quit()
 
     filename = f"laz_motobike_{currentDateTime}.csv"
-    df_main.to_csv(filepath+filename, index=False, encoding='utf-8')
+    df_main.drop('id',axis=1)
+    df_main['id'] = range(1, len(df_main) + 1)
+    fileN = filepath+ filename
+    df_main.to_csv(fileN, index=False, encoding='utf-8')
     print(f"Crawl hoàn tất và lưu vào {filename}")
-
-crawlerLaz("data")
+    return fileN
+# crawlerLaz("data")

@@ -5,7 +5,7 @@ from datetime import datetime
 log_db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'password',  # Thay bằng mật khẩu của bạn
+    'password': 'rooot',  # Thay bằng mật khẩu của bạn
     'database': 'dbControl'
 }
 
@@ -13,9 +13,9 @@ log_db_config = {
 def get_log_connection():
     return pymysql.connect(
         host=log_db_config['host'],
-        user=log_db_config['root'],
-        password=log_db_config['rooot'],
-        database=log_db_config['dbcontrol'],
+        user=log_db_config['user'],
+        password=log_db_config['password'],
+        database=log_db_config['database'],
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor
     )

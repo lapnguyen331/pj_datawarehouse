@@ -9,8 +9,8 @@ def send_email(to_email, subject, message_body):
     # Thông tin SMTP
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
-    sender_email = "your_email@gmail.com"  # Email của bạn
-    sender_password = "your_password"      # Mật khẩu email (hoặc App Password)
+    sender_email = "haudau124@gmail.com"  # Email của bạn
+    sender_password = "tqvt vdse pudm vtvp"      # Mật khẩu email (hoặc App Password)
 
     try:
         # Tạo email
